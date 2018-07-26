@@ -30,20 +30,16 @@
 			<form method="post" action="postinsert.php">
 				<div class='errors'>
 					<?php 
-						if(isset($_SESSION['name'])) {
-							echo $_SESSION['name'];
-							unset($_SESSION['name']);
+						if(isset($_SESSION['success'])) {
+							echo $_SESSION['success'];
+							unset($_SESSION['success']);
 						} 
 
-						if(isset($_SESSION['address'])) {
-							echo $_SESSION['address'];
-							unset($_SESSION['address']);
+						if(isset($_SESSION['error'])) {
+							echo $_SESSION['error'];
+							unset($_SESSION['error']);
 						} 
 
-						if(isset($_SESSION['email'])) {
-							echo $_SESSION['email'];
-							unset($_SESSION['email']);
-						} 
 					?>
 				</div>
 				Name: <input type="text" name="name"> <br> <br>

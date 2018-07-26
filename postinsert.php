@@ -1,25 +1,28 @@
 <?php
-	session_start();
-	if(!empty($_REQUEST)) {
+	require_once('includes/include.php');
+	
 
-		$name = $_REQUEST['name'];
-		$address = $_REQUEST['address'];
-		$email	 = $_REQUEST['email'];
+	$rules = ['required' => ['name'],
+				'min' => ['name' => 5],
+				'max' => ['name' => 10]
+				];
 
-		if($name == '') 
-		{
-			$_SESSION['name'] =  "Name is required! <br />";
-		} 
+	$error = validate($_REQUEST, $rules);
+	dd();
+	if($error == '') {
 
-		if($address == '') {
-			$_SESSION['address'] =  "Address is required! <br />";
-		}
+		extract($_REQUEST);
 
-		if($email == '') 
-		{
-			$_SESSION['email'] = "Email is required!";
-		}
+		$query = "INSERT INTO studentinfo (name,address,email, mobile, city) Values('$name','$address','$email', '99120912', 'rajkot')";
 
+		sql($query, $db);
+
+		//set session for sucess
+		$_SESSION['success'] = "Created!";
+	} else {
+
+		//set session for error
+		$_SESSION['error'] = $error;
 	}
 
 	header('location:insert.php');
